@@ -10,6 +10,7 @@ from functools import partial
 
 
 class Button(QPushButton):
+    """class Button to create identical buttons for the main window"""
     def __init__(self, name):
         QPushButton.__init__(self, name)
 
@@ -23,14 +24,16 @@ class Button(QPushButton):
 class Calculator(QWidget):
     """A desktop calculator."""
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, number_of_transaction_history_lines=15):
         QWidget.__init__(self, parent)  # create window
         self.setWindowTitle('Calculator')
         self.setMaximumWidth(700)
+        self.setMaximumHeight(400)
         self.move(self.width() * -2, 0)  # we will display the window outside the screen
 
         self.expression = '0'
         self.history = ['']
+        self.number_of_transaction_history_lines = number_of_transaction_history_lines
 
         self.main_box = QVBoxLayout()
         self.buttons = QGridLayout()
@@ -72,7 +75,6 @@ class Calculator(QWidget):
 
         self.history_screen = QLabel()  # create window to display history of operation
         self.history_screen.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignBottom)
-        self.history_screen.setMaximumWidth(700)
         self.history_screen.setToolTip('''<center>Display the history of the operation</center>''')
 
         self.error_screen = QLabel()  # create window to display errors
@@ -424,7 +426,12 @@ class Calculator(QWidget):
                 self.lcd.setText(result)
                 self.history[-1] = f'{self.expression} = {result}'
                 self.history.append('')
+
+                # show the last ... operations
+                if len(self.history) > self.number_of_transaction_history_lines:
+                    self.history = self.history[1:]
                 self.history_screen.setText('\n'.join(self.history))
+
                 self.expression = result
         else:
             self.error_screen.setText('Incorrect number of parenthesis')
