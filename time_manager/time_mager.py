@@ -56,6 +56,7 @@ class Question(BaseWindow):
 
     def __init__(self, label_rbtn_1: str, label_rbtn_2: str, label_group_box: str, parent=None):
         BaseWindow.__init__(self, parent)
+        self.setMinimumSize(300, 150)
         self.setWindowFlags(QtCore.Qt.CustomizeWindowHint | QtCore.Qt.WindowTitleHint)
 
         self._check_value = None
@@ -109,12 +110,6 @@ class Question(BaseWindow):
             self.check_value = self.rbtn_1.text()
         elif self.rbtn_2.isChecked():
             self.check_value = self.rbtn_2.text()
-
-
-class SearchOrCreateFile(QFileDialog):
-    """In class SearchOrCreateFile windows for selecting a file to save data by the user are implemented"""
-    def __init__(self, parent=None, caption="TimeManager"):
-        QFileDialog.__init__(self, parent=parent, caption=caption)
 
 
 class NamedFile(BaseWindow):
@@ -361,7 +356,7 @@ class TimeManager(BaseWindow):
                 self.question.close()
 
                 if self.question.check_value == 'Create file':
-                    self.path_file = SearchOrCreateFile.getSaveFileName(filter="*.doc *.txt")[0]
+                    self.path_file = QFileDialog.getSaveFileName(filter="*.doc *.txt")[0]
                     if not (self.path_file.endswith('.doc') or self.path_file.endswith('.txt')):
                         separator = '/'
 
@@ -378,7 +373,7 @@ class TimeManager(BaseWindow):
                             qApp.processEvents()  # Starting the cycle rotation
 
                 elif self.question.check_value == 'Select file':
-                    self.path_file = SearchOrCreateFile.getOpenFileName(filter="Files (*.doc *.txt)")[0]
+                    self.path_file = QFileDialog.getOpenFileName(filter="Files (*.doc *.txt)")[0]
 
                 self.show()  # display time manager window
                 break
