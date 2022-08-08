@@ -130,4 +130,6 @@ dmypy.json
 .idea/*
 .env
 
-*/.exe
+*/*.exe
+*/*.bat
+*/*.cmd
