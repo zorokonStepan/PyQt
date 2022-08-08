@@ -53,7 +53,7 @@ class ToDoList(BaseWindow):
 
         self.is_closed = False  # auxiliary flag
 
-        file_name = f'{self.headings[0]}_{self.headings[6]}'
+        file_name = f'{self.headings[0]}_{self.headings[6]}.json'
         self.file_path = os.path.join(self.path, file_name)
         if os.path.exists(self.file_path):
             with open(self.file_path, 'r', encoding='utf-8') as json_file:  # open file
