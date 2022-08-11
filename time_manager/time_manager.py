@@ -9,7 +9,7 @@ work and save data in files with extensions .doc and .txt.
 import sys
 import time
 
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QVBoxLayout, QLabel, QRadioButton, QGroupBox,
                              QHBoxLayout, qApp, QLineEdit, QFileDialog, QMessageBox, QTextEdit)
 
@@ -33,7 +33,8 @@ class BaseWindow(QWidget):
 
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
-
+        icon = QtGui.QIcon(r"images/clock.png")
+        self.setWindowIcon(icon)
         self.setWindowTitle("TimeManager")
         self.move(self.width() * -2, 0)  # we will display the window outside the screen
         self.resize(300, 150)
