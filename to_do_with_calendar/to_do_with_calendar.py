@@ -24,8 +24,6 @@ class BaseWindow(QWidget):
 
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
-        ico = QtGui.QIcon("images/to_do.png")
-        self.setWindowIcon(ico)
 
         self.setWindowTitle("To Do List")
         self.move(self.width() * -2, 0)  # we will display the window outside the screen
@@ -47,7 +45,12 @@ class ToDoList(BaseWindow):
 
     def __init__(self, headings: Union[list, tuple], current_index: int, path: str, parent=None):
         BaseWindow.__init__(self, parent)  # create window
+
+        style = self.style()
+        icon = style.standardIcon(QStyle.SP_DriveNetIcon)
+
         self.setMinimumSize(500, 300)
+        self.setWindowIcon(icon)
 
         self.headings = headings  # tab headers
         self.current_index = current_index  # the tab that will be opened
@@ -67,8 +70,6 @@ class ToDoList(BaseWindow):
             self.contents = ['', '', '', '', '', '', '']
 
         self.tab = QTabWidget()
-        style = self.style()
-        icon = style.standardIcon(QStyle.SP_DriveNetIcon)
 
         for content, heading in zip(self.contents, self.headings):
             self.tab.addTab(QPlainTextEdit(content), icon, heading)
@@ -105,6 +106,8 @@ class MainWindow(BaseWindow):
 
     def __init__(self, folder: str = 'ToDoListWithCalendar', parent=None):
         BaseWindow.__init__(self, parent)  # create window
+        icon = QtGui.QIcon("images/to_do.png")
+        self.setWindowIcon(icon)
 
         self.folder = folder  # the name of the folder for storing records in the application folder
         if not os.path.exists(folder):
