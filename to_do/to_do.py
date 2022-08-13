@@ -20,6 +20,8 @@ class ToDo(QWidget):
         QWidget.__init__(self, parent)
         self.setMinimumSize(500, 300)
         self.setWindowTitle("ToDo")
+        icon = QtGui.QIcon(r"images/to_do.png")
+        self.setWindowIcon(icon)
         self.move(self.width() * -2, 0)  # we will display the window outside the screen
 
         path = os.getcwd()  # getting the current working directory
