@@ -5,7 +5,7 @@ import sys
 
 from math import sqrt
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QVBoxLayout, QGridLayout, QLabel
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from functools import partial
 
 
@@ -27,6 +27,8 @@ class Calculator(QWidget):
     def __init__(self, parent=None, number_of_transaction_history_lines=15):
         QWidget.__init__(self, parent)  # create window
         self.setWindowTitle('Calculator')
+        icon = QtGui.QIcon(r"images/calculator.png")
+        self.setWindowIcon(icon)
         self.setMaximumWidth(700)
         self.setMaximumHeight(400)
         self.move(self.width() * -2, 0)  # we will display the window outside the screen
