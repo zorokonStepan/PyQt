@@ -24,6 +24,8 @@ class BaseWindow(QWidget):
 
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
+        ico = QtGui.QIcon("images/to_do.png")
+        self.setWindowIcon(ico)
 
         self.setWindowTitle("To Do List")
         self.move(self.width() * -2, 0)  # we will display the window outside the screen
@@ -44,7 +46,7 @@ class ToDoList(BaseWindow):
     """class ToDoListWithCalendar implements a window with entries for a week with a selected date"""
 
     def __init__(self, headings: Union[list, tuple], current_index: int, path: str, parent=None):
-        BaseWindow.__init__(self, parent)
+        BaseWindow.__init__(self, parent)  # create window
         self.setMinimumSize(500, 300)
 
         self.headings = headings  # tab headers
@@ -172,5 +174,7 @@ class MainWindow(BaseWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    # icon = QtGui.QIcon(r"images/calendar.png")
+    # app.setWindowIcon(icon)
     main_window = MainWindow()
     sys.exit(app.exec_())
