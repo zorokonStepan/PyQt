@@ -3,6 +3,8 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QHBoxLayout, QVBoxLayout
 from PyQt5.QtCore import QEvent
+from PyQt5 import QtGui
+
 from functools import partial
 
 """
@@ -30,6 +32,8 @@ class HanoiTower(QWidget):
     def __init__(self, total_disks: int = 5, parent=None):
         QWidget.__init__(self, parent)  # create window
         self.setWindowTitle("Hanoi Tower")
+        icon = QtGui.QIcon(r"images/Pyramid.png")
+        self.setWindowIcon(icon)
         self.resize(400, 300)
 
         self.number_of_moves = 0
