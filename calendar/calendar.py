@@ -4,6 +4,7 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QCalendarWidget, QLabel, QApplication, QVBoxLayout
 from PyQt5.QtCore import QDate
+from PyQt5 import QtGui
 
 
 class Calendar(QWidget):
@@ -11,6 +12,8 @@ class Calendar(QWidget):
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)  # create window
         self.setWindowTitle('Календарь')
+        icon = QtGui.QIcon(r"images/calendar.png")
+        self.setWindowIcon(icon)
         self.resize(400, 200)
         self.move(self.width() * -2, 0)  # we will display the window outside the screen
 
